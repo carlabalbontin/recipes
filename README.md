@@ -1,0 +1,2 @@
+# recipes
+Exercises with JS
