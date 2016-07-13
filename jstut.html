@@ -1,0 +1,58 @@
+<html>
+<head></head>
+
+<body>
+
+<p id="sayHello"></p>
+
+<!--
+<script>
+	var yourName = prompt("What is your name?"); //creo la variable yourName para que almacene lo que el usuario escriba cuando el prompt le pregunte su nombre
+
+	if(yourName != null) {  //si escribió algo en el prompt - null es vacío
+		document.getElementById("sayHello").innerHTML = "Hello" + yourName; //agarra el id sayHello y cambia el html a "Hello" + el nombre que la persona haya puesto en el prompt
+	} else {
+		alert("Please enter a name next time");
+	}
+
+</script>
+-->
+
+<!-- Basic JS notions 
+<script>
+
+	var randNum = 5;
+	document.write("randNum++ =", randNum++, "<br/>"); // Pone el randNum y después lo aumenta en uno. O sea sale randNum++ = 5
+	document.write("++randNum =", ++randNum, "<br/>"); // Aumenta el randNum antes de aumentarlo en uno. O sea sale randNum++ = 6 (7 si pones la función anterior antes, ya que después de imprimir el 5 aumenta su valor a 6)
+
+	document.write("randNum += 4 =", randNum += 4, "<br/>"); //Le suma 4 a randNum y almacena el valor (9) en la variable randNum
+
+</script>
+-->
+
+
+<script>
+	var randStr = "A long " + "string that " + "goes on and on";
+
+	document.write("String Length ", randStr.length + "<br/>");
+	document.write("Index for \"goes\" : ", randStr.indexOf("goes"), "<br/>"); //At what number character does that word begin
+	document.write(randStr.slice(19, 23) + "<br/>"); //Mostrar el string desde el character 19 hasta el 23
+	document.write(randStr.slice(19) + "<br/>"); //Mostrar el string desde el character 19 hasta el final
+
+	document.write(randStr.substr(19, 4) + "<br/>"); //Mostrar 4 caracteres del string desde el character 19 
+
+	document.write(randStr.replace("and on", "forever") + "<br/>"); //Reemplazar un string del texto por otro
+
+	var randStrArray = randStr.split(" "); //Separar el string por cada espacio - lo deja como un array
+
+	randStr = randStr.trim(); //Sacar los espacios que hay al principio o al final del string
+
+
+	document.write(randStr.toUpperCase() + "<br/>"); //Convierte el string en mayúsculas
+	document.write(randStr.toLowerCase() + "<br/>"); //Convierte el string en minúsculas 
+
+
+
+</script>
+</body>
+</html>
