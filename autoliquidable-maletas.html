@@ -1,0 +1,113 @@
+<link rel="stylesheet" href="http://www.sodimac.cl/static/Homy/fonts/intro.css">
+
+<style>
+	* {line-height:1.5;}
+   #row {margin:20px 0;}
+   img#maletas {max-width:300px;margin:0 auto;}
+   
+   #promo {padding-top:20px;}
+   #promo p {font-family: 'intro_bookregular',sans-serif;text-align:center;color:#666666;}
+   #promo p.text {font-family: 'intro_book_capsregular',sans-serif;font-size:16px;}
+   #promo p.precio {font-family:'intro_bold_capsregular', sans-serif;}
+   #promo p#azul {color:#008EAA;font-size:28px;}
+   #promo p#gris {font-size:20px;}
+   #promo p#ref {font-family:'intro_light_italicitalic', sans-serif; font-size:12px;}
+   #promo p.colores {font-family: 'intro_book_capsregular',sans-serif;}
+   #promo #corazon {max-width:220px;margin:0 auto;}
+   
+   #promo #color-buttons {width:170px;margin:0 auto;}
+   #promo #color-buttons button {width:19px;height:19px;border-radius:9px;margin:3px;border:none;}
+   #promo #color-buttons button#amarillo {background-color:#fedc32;}
+   #promo #color-buttons button#verde {background-color:#8f9e65;}
+   #promo #color-buttons button#azul {background-color:#353862;}
+   #promo #color-buttons button#morado {background-color:#a495c2;}
+   #promo #color-buttons button#negro {background-color:#000;}
+   #promo #color-buttons button#gris {background-color:#c1c0c3;}
+
+   #ficha {border-bottom:solid #CCC thin; padding:10px 0;}
+   #ficha h2 {font-family:'intro_bold_capsregular', sans-serif; font-size:20px;color:#008EAA;padding:10px 0; border-bottom:solid #CCC thin;}
+   #ficha h4 {font-family: 'intro_boldregular', sans-serif; font-size:14px;color:#666666;margin-bottom:4px;}
+   #ficha p {font-family: 'intro_lightregular', sans-serif; font-size:12px;color:#666666;}
+   
+   #bases-legales {width:269px;height:38px;background-color:#FFC600;font-family:'intro_bold_capsregular', sans-serif;font-size:14px;color:#666666;padding:10px;text-align:center;}
+   
+   @media (min-width: 760px) {
+	   img#maletas {max-width:335px;}
+	   #promo p.text {font-size:20px;}
+	   #promo p#azul {font-size:53px;}
+	   #promo p#gris {font-size:33px;}
+	   #promo p#ref {font-size:14px;}
+	   #promo #corazon {max-width:281px;}
+	   #ficha h4 {font-size:17px;}
+	   #ficha p {font-size:16px;}
+   }
+</style>
+
+<div class="full-promo">
+    <img src="http://www.sodimac.cl/static/Homy/html/contenido-estatico/especiales/autoliquidable-maletas/images/vitrina.jpg" alt="Autoliquidable Maletas" class="img-responsive"><span class="pull-left col-6 col-md-6 col-xs-12 col-sm-6"></span>
+</div>
+
+<div class="container mt-20">
+    <div class="row" id="row">   
+          <div class="pull-left col-5 col-md-5 col-md-offset-1 col-xs-12 col-sm-6">
+          <img src="http://s7d5.scene7.com/is/image/SodimacCL/2963086_01" alt="Set de Maletas" class="img-responsive" id="maletas"/>
+          </div>
+          
+          <div class="pull-left col-5 col-md-5 col-xs-12 col-sm-6" id="promo">
+              <p class="text">Compra un producto sobre</p>
+               <img src="http://www.sodimac.cl/static/Homy/html/contenido-estatico/especiales/autoliquidable-maletas/images/corazon.png" alt="Corazón Homy" class="img-responsive" id="corazon">
+               <p class="precio" id="azul">$99.990</p>
+               <p class="precio" id="gris">+ $49.990</p>
+               <p class="text">Lleva un set de maletas</p>
+               <p id="ref">Precio de referencia: $119.990</p>
+               <p class="colores mt-10">Colores disponibles</p>
+               <div id="color-buttons">
+                   <button id="amarillo" name="2963086" onclick="changeColor(this.name)"></button>
+                   <button id="verde" name="2963078" onclick="changeColor(this.name)"></button>
+                   <button id="azul" name="296306X" onclick="changeColor(this.name)"></button>
+                   <button id="morado" name="2963051" onclick="changeColor(this.name)"></button>
+                   <button id="negro" name="2963043" onclick="changeColor(this.name)"></button>
+                   <button id="gris" name="2963035" onclick="changeColor(this.name)"></button>
+               </div>
+          </div>
+    </div>
+    
+    <div class="row" id="row">  
+    	<div class="col-12" id="ficha">
+       	  <h2>Ficha técnica</h2>
+            
+            <h4>Características</h4>
+            <p>Set de 3 maletas con diferentes tamaños</p>
+            
+            <h4>Capacidad</h4>
+            <p>108 litros la maleta grande, 71.9 litros la maleta mediana y 44.3 litros la maleta chica</p>
+            
+            <h4>Material</h4>
+            <p>Polipropileno</p>
+            
+            <h4>Alto</h4>
+            <p>71 cm maleta grande, 61.5 cm maleta mediana y 53 cm maleta chica</p>
+            
+            <h4>Ancho</h4>
+            <p>30 cm maleta grande, 26 cm maleta mediana y 22 cm maleta chica</p>
+            
+            <h4>Largo</h4>
+            <p>51 cm maleta grande, 45 cm maleta mediana y 38 cm maleta chica</p>
+
+        </div>
+    </div>
+    
+    <div class="row" id="row">  
+    	<a href="http://www.sodimac.cl/static/Homy/html/contenido-estatico/especiales/autoliquidable-maletas/bases-legales.pdf" target="_blank">
+    	<div class="col-3" id="bases-legales">VER BASES LEGALES</div>
+        </a>
+    </div>
+</div>
+
+<script>
+var image = document.getElementById('maletas');
+
+function changeColor (sku) {
+	image.src = 'http://s7d5.scene7.com/is/image/SodimacCL/' + sku + '_01';
+}
+</script>
