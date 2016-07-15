@@ -1,0 +1,42 @@
+<html>
+<head>
+	<title>Buscar enlaces</title>
+</head>
+<body>
+	<header>
+		<a id="enlace1" href="http://www.google.cl">Google</a>
+		<a href="http://www.facebook.com">Facebook</a>
+		<a href="http://www.twitter.cl">Twitter</a>
+		<a href="http://www.instagram.cl">Instagram</a>
+	</header>
+
+	<div class="mainSection">
+		<a href="http://www.google.cl">Google</a>
+		<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. </p>
+		<a href="http://www.facebook.com">Facebook</a>
+		<p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. </p>
+	</div>
+
+<script>
+var enlaces = document.getElementsByTagName('a');
+var nEnlaces = enlaces.length;
+var out =0;
+
+
+for (var i = 0 ; i <= nEnlaces-1; i++) {
+	if(enlaces[i]== "http://www.google.cl/"){
+		out++;
+	} else {
+		out += "";
+	}
+	
+}
+
+
+console.log(out);
+
+
+</script>
+
+</body>
+</html>
