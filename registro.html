@@ -1,0 +1,251 @@
+<!-- Registro mail -->
+<style>
+#r_overlay{width:100%; height:100%; position:fixed; background-color:#000; opacity:0.75; filter:alpha(opacity=75); z-index:9998; top:0; left:0; display:none}
+#r_contPrinc{width:750px; height:500px; font-family:Arial, Helvetica, sans-serif; background:url(/static/site/HOMY/homy-cs/registro/img/r_imgReg_bg.png) no-repeat 0 0;  z-index:9999; position:absolute; top:130px; left:50%; margin:0 0 0 -303px; display:none}
+#r_registro{display:none}
+#r_cerrar{width:23px; height:22px; background:url(/static/site/HOMY/homy-cs/registro/img/r_cerrar.png) no-repeat 0 -1px; position:absolute; top:7px; right:10px; text-indent:-9999px; display:block}
+#r_cerrar:hover{background-position:0 -22px}
+.r_genero_1{position:absolute; top:140px; left:30px}
+.r_genero_2{position:absolute; top:140px; left:130px}
+.r_labelMujer{position:absolute; top:140px; left:47px; font-size:14px; color:#333}
+.r_labelHombre{position:absolute; top:140px; left:147px; font-size:14px; color:#333}
+.r_llamado{width:342px; height:67px; background:url(/static/site/HOMY/homy-cs/registro/img/r_imgReg_3.png) no-repeat 0 0; position:absolute; top:40px; left:22px}
+.r_bajada{width:342px; height:auto; text-align:left; font-size:14px; color:#75787B; position:absolute; top:110px; left:22px; line-height:21px}
+.r_email{width:200px; height:20px; border:2px #bcbcbc solid; text-align:left; color:#333; font-size:16px; padding:3px 5px; position:absolute; top:255px; left:30px; border-radius:3px}
+.r_rut{width:200px; height:20px; border:2px #bcbcbc solid; text-align:left; color:#333; font-size:16px; padding:3px 5px; position:absolute; top:295px; left:30px; border-radius:3px}
+.r_enviar{width:113px; height:30px; transition: all 200ms ease-in; background:url(/static/site/HOMY/homy-cs/registro/img/r_enviar.png) no-repeat 0 0; position:absolute; top:408px; left:30px; text-indent:-9999px; display:block}
+.r_enviar:hover{opacity:0.8}
+.r_terminos{width:20px; height:auto; position:absolute; top:360px; left:30px}
+.r_txtTerminos{width:160px; height:auto; position:absolute; top:360px; left:50px; line-height:16px; color:#666; font-size:11px}
+.r_txtRut{width:250px; height:auto; position:absolute; top:325px; left:25px; line-height:16px; color:#666; font-size:11px}
+.r_txtTerminos a{text-decoration:underline; color:#666; transition: all 200ms ease-in}
+.r_txtTerminos a:hover{text-decoration:underline; color:#999}
+#r_enviado{width:350px; font-size:16px; text-align:left; position:absolute; top:180px; left:50px; line-height:18px; color:#75787B; display:none}
+#r_enviado span{font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:20px; line-height:35px}
+#iframeRegistro{position:absolute; top:170px; right:10px}
+</style>
+
+<script>
+var emailUser = '';
+var emailOK = false;
+var rutOK = false;
+var terminos = false;
+
+function validaRut(){
+    Objeto = $('.r_rut').val();
+    rutUser = Objeto.replace('-','');
+    var tmpstr = "";
+    var intlargo = Objeto;
+    if(Objeto === '' || Objeto === null){
+        $('.r_rut').css('border','1px #bcbcbc solid');
+        rutOK = false;
+        return true;
+    }
+	
+    if (intlargo.length >0) {
+        var crut = Objeto;
+        largo = crut.length;
+        if (largo < 2) {
+            $('.r_rut').css('border','1px #ea0000 solid');
+            $('.r_rut').focus();
+            $(".r_rut").val('');
+            return false;
+        }
+        for (i = 0; i < crut.length; i++) {
+            if (crut.charAt(i) != ' ' && crut.charAt(i) != '.' && crut.charAt(i) != '-') {
+                tmpstr = tmpstr + crut.charAt(i);
+            }
+        }
+        var rut = tmpstr;
+        crut = tmpstr;
+        largo = crut.length;
+        if (largo > 2) {
+            rut = crut.substring(0, largo - 1);
+        } else {
+            rut = crut.charAt(0);
+        }
+        dv = crut.charAt(largo - 1);
+        if (rut === null || dv === null) {
+            return 0;
+        }
+        var dvr = '0';
+        suma = 0;
+        mul = 2;
+        for (i = rut.length - 1; i >= 0; i--) {
+            suma = suma + rut.charAt(i) * mul;
+            if (mul == 7) {
+                mul = 2;
+            } else {
+                mul++;
+            }
+        }
+        res = suma % 11;
+        if (res == 1) {
+            dvr = 'k';
+        } else if (res === 0) {
+            dvr = '0';
+        } else {
+            dvi = 11 - res;
+            dvr = dvi + "";
+        }
+        if (dvr != dv.toLowerCase()) {
+            $('.r_rut').css('border','1px #ea0000 solid');
+            $('.r_rut').focus();
+            $(".r_rut").val('');
+            return false;
+        }
+        $('.r_rut').css('border','1px #bcbcbc solid');
+        rutOK = true;
+        return true;
+    }
+} //end
+	
+	function validaEmail(){
+    var x = $(".r_email").val();
+    var atpos=x.indexOf("@");
+    var dotpos=x.lastIndexOf(".");
+    if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length){
+        $('.r_email').css('border','1px #ea0000 solid');
+        $('.r_email').focus();
+        $(".r_email").val('');
+        return false;
+    }else{
+        $('.r_email').css('border','1px #bcbcbc solid');
+        emailOK = true;
+        emailUser = $(".r_email").val();
+        return true;
+    }
+}//end
+
+function registrar(){
+    validaEmail();
+    validaRut();    
+    if(emailOK == true && rutOK == true && $('.r_terminos').is(':checked')){
+        var url = "http://pages.corp.mundohomy.com/inscripcion_v1/";
+        //var generoUser = $("input[name=genero]:checked").val();
+        var rutUser =  $(".r_rut").val();
+		rutUser = rutUser.replace('-','');
+		rutUser = rutUser.replace('.','');
+        //if(generoUser == undefined){generoUser=''}; 
+        //if(rutUser == undefined){rutUser=''}; 
+        emailUser = emailUser.toLowerCase();
+        url += "?e=" + emailUser;
+        url += "&de=preferencias_homy";
+       // url += "&g=" + generoUser;
+        url += "&r=" + rutUser;     
+        $('#iframeRegistro').attr('src',url);
+        $('#iframeRegistro').load(function(){
+            $('#r_registro').hide();
+            $('#r_enviado').fadeIn();
+            setTimeout(function(){$('#r_overlay').fadeOut(600); $('#r_contPrinc').fadeOut(400)} , 4000);
+        });
+    }else if(emailOK == false){
+        $('.r_email').css('border','1px #ea0000 solid');
+        $('.r_email').focus();
+        $(".r_email").val('');
+		$(".r_email").attr("placeholder", "Ingresa e-mail correcto");
+    }else if(rutOK == false){
+        $('.r_rut').css('border','1px #ea0000 solid');
+        $('.r_rut').focus();
+        $(".r_rut").val('');
+		$(".r_rut").attr("placeholder", "Ingresa un rut correcto");
+    }else if(!$('.r_terminos').is(':checked')){
+        alert('Debes aceptar terminos y condiciones');
+    }
+}//end
+
+function setCookie_2(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}//end
+
+if(typeof String.prototype.trim !== 'function') {
+    String.prototype.trim = function() {
+        return this.replace(/^\s+|\s+$/g, ''); 
+    }
+}//end trim
+
+function getCookie_2(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+    var c = ca[i].trim();
+    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}//end
+
+function checkCookie_2() {
+    var ejecutaSusc = getCookie_2("ss_home");
+    if (ejecutaSusc != "") {
+        //Si tiene la cookie no desplegar
+    } else {
+        document.getElementById("r_overlay").style.display="block";
+        document.getElementById("r_contPrinc").style.display="block";
+        document.getElementById("r_registro").style.display="block";
+        ejecutaSusc = 'not';
+        if (ejecutaSusc != "") {
+            setCookie_2("ss_home", ejecutaSusc, 180);
+        }
+    }
+}//end
+
+$(document).ready(function(){
+    checkCookie_2();
+    $('#r_cerrar, #r_overlay').click(function(){
+        $('#r_overlay').fadeOut(600);
+        $('#r_contPrinc').fadeOut(400);
+    });
+});
+</script>
+
+
+<div id="r_overlay" style="width:100%; height:100%; position:fixed; background-color:#000; opacity:0.75; filter:alpha(opacity=75); z-index:9998; top:0; left:0;"></div>
+<div id="r_contPrinc" style="width:750px; height:500px; font-family:Arial, Helvetica, sans-serif; background:url(/static/site/HOMY/homy-cs/registro/img/r_imgReg_bg.png) no-repeat 0 0;  z-index:9999; position:absolute; top:130px; left:50%; margin:0 0 0 -303px;">
+    <div id="r_registro">
+        <div class="r_llamado" style="width:342px; height:67px; background:url(/static/site/HOMY/homy-cs/registro/img/r_imgReg_3.png) no-repeat 0 0; position:absolute; top:40px; left:22px"></div>
+        <div class="r_bajada" style="width:342px; height:auto; text-align:left; font-size:14px; color:#75787B; position:absolute; top:110px; left:22px; line-height:21px">Inspírate con nuestras últimas colecciones, tendencias en decoración y diseño, prácticos datos, LookBook para replicar en tu casa y diviértete decorando con todas las mejores ideas de nuestro Blog.<br /><b>¡No te lo pierdas!</b></div>
+        <input type="text" placeholder="Ingresa tu e-mail" class="r_email" style="width:200px; height:20px; /*text-transform:lowercase;*/ border:2px #bcbcbc solid; text-align:left; color:#333; font-size:16px; padding:3px 5px; position:absolute; top:255px; left:30px; border-radius:3px;" maxlength="50">
+        <!--<input type="text" placeholder="Ingresa tu Rut" class="r_rut" maxlength="10">-->
+        
+        <input type="text" name="rut" id="rut" placeholder="Ingresa tu Rut" class="r_rut" style="width:200px; height:20px; border:2px #bcbcbc solid; text-align:left; color:#333; font-size:16px; padding:3px 5px; position:absolute; top:295px; left:30px; border-radius:3px;" OnChange=validaRut(this);> 
+        <div class="r_txtRut" style="width:250px; height:auto; position:absolute; top:325px; left:25px; line-height:16px; color:#666; font-size:11px">&nbsp Ingresa Rut sin puntos ni gui&oacute;n (Ej: 123456789) </div>
+        <input type="checkbox" name="acepta" class="r_terminos" style="width:20px; height:auto; position:absolute; top:360px; left:30px">
+        <div class="r_txtTerminos" style="text-decoration:underline; color:#666;position:absolute; top:360px; left:60px">Acepto <a href="http://www.sodimac.cl/sodimac-homy/static/staticContent1.jsp?active=2&id=cat2640009" target="_blank">t&eacute;rminos y condiciones</a></div>
+        
+        <a href="javascript://" class="r_enviar" style="width:113px; height:30px; transition: all 200ms ease-in; background:url(/static/site/HOMY/homy-cs/registro/img/r_enviar.png) no-repeat 0 0; position:absolute; top:408px; left:30px; text-indent:-9999px; display:block" onclick="registrar()">enviar</a>
+        <iframe id="iframeRegistro" style="position:absolute; top:170px; right:10px" width="3" height="3" frameborder="0" scrolling="no"></iframe>
+    </div>
+    <div id="r_enviado" style="width:350px; font-size:16px; text-align:left; position:absolute; top:180px; left:50px; line-height:18px; color:#75787B; display:none">
+        <span style="font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:20px; line-height:35px">&iexcl;Gracias por registrarte!</span><br />Pronto comenzar&aacute;s a disfrutar de nuestras novedades y beneficios
+    </div>
+</div>
+
+<script>
+     (function ($) {
+         $.support.placeholder = ('placeholder' in document.createElement('input'));
+     })(jQuery);
+
+
+     //fix for IE7 and IE8
+     $(function () {
+         if (!$.support.placeholder) {
+             $("[placeholder]").focus(function () {
+                 if ($(this).val() == $(this).attr("placeholder")) $(this).val("");
+             }).blur(function () {
+                 if ($(this).val() == "") $(this).val($(this).attr("placeholder"));
+             }).blur();
+
+             $("[placeholder]").parents("form").submit(function () {
+                 $(this).find('[placeholder]').each(function() {
+                     if ($(this).val() == $(this).attr("placeholder")) {
+                         $(this).val("");
+                     }
+                 });
+             });
+         }
+     });
+</script>
+<!-- Fin Registro mail-->
